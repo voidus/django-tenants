@@ -87,7 +87,8 @@ class Command(BaseCommand):
         except exceptions.ValidationError as e:
             self.stderr.write("Error: %s" % '; '.join(e.messages))
             return None
-        except IntegrityError:
+        except IntegrityError as e:
+            self.stderr.write("IntegrityError: %s" % repr(e))
             return None
 
     def store_tenant_domain(self, **fields):
@@ -98,5 +99,6 @@ class Command(BaseCommand):
         except exceptions.ValidationError as e:
             self.stderr.write("Error: %s" % '; '.join(e.messages))
             return None
-        except IntegrityError:
+        except IntegrityError as e:
+            self.stderr.write("IntegrityError: %s" % repr(e))
             return None
